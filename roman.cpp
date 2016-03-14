@@ -4,7 +4,7 @@
 
 using namespace std;
 
-static unordered_multimap<int,string> arabic_to_roman;
+static unordered_map<int,string> arabic_to_roman;
 
 void buildRomanHash(){
     // 1 - 10
