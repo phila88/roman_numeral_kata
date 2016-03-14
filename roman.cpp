@@ -31,6 +31,8 @@ int main()
 
     // Tests
     assert((convertArabicToRoman(1) == "I") && "Not I");
+		assert((convertArabicToRoman(3) == "III") && "Not III");
+    assert((convertArabicToRoman(9) == "IX") && "Not IX");
     
     cout << "PASS" << endl;
     return 0;
