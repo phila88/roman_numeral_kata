@@ -80,6 +80,7 @@ int main()
 		assert((convertArabicToRoman(3) == "III") && "Not III");
     assert((convertArabicToRoman(9) == "IX") && "Not IX");
     assert((convertArabicToRoman(1066) == "MLXVI") && "Not MLXVI");
+    assert((convertArabicToRoman(1989) == "MCMLXXXIX") && "Not MCMLXXXIX");
 
     cout << "PASS" << endl;
     return 0;
