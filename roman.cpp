@@ -86,6 +86,17 @@ int convertRomanToArabic(std::string str){
             return 0; // base case
         }
     }
+		else if(str.length() >= 4){
+        //cout<<">= 4"<<endl;
+        auto it = roman_to_arabic.find(str.substr(0,4));  // check 4 letter numerals first
+        if(it != roman_to_arabic.end()){
+            //cout<<"4 letter roman"<<endl;
+            if(str.length() == 4)
+                return it->second;
+            else
+                return it->second + convertRomanToArabic(str.substr(4,str.length() - 4));
+        }
+		}
 }
 
 int main()
@@ -107,6 +118,7 @@ int main()
     assert((convertRomanToArabic("I") == 1) && "Not 1");
     assert((convertRomanToArabic("III") == 3) && "Not 3");
     assert((convertRomanToArabic("IX") == 9) && "Not 9");
+		assert((convertRomanToArabic("VIII") == 8) && "Not 8");
     
     cout << "PASS" << endl;
     return 0;
