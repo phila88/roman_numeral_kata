@@ -102,6 +102,20 @@ int convertRomanToArabic(std::string str){
                 //cout<<"3 letter roman"<<endl;
                     return it->second + convertRomanToArabic(str.substr(3,str.length() - 3));
 						}
+						else{
+                it = roman_to_arabic.find(str.substr(0,2)); // then check 2 letter numerals
+                if(it != roman_to_arabic.end()){
+                    //cout<<"2 letter roman"<<endl;
+                        return it->second + convertRomanToArabic(str.substr(2,str.length() - 2));
+                }
+                else{
+                    it = roman_to_arabic.find(str.substr(0,1)); // finally check 1 letter numerals
+                    if(it != roman_to_arabic.end()){
+                        //cout<<"1 letter roman"<<endl;
+                            return it->second + convertRomanToArabic(str.substr(1,str.length() - 1));
+                    }
+                }
+            }
 				}
 		}
 }
@@ -127,6 +141,8 @@ int main()
     assert((convertRomanToArabic("IX") == 9) && "Not 9");
 		assert((convertRomanToArabic("VIII") == 8) && "Not 8");
 		assert((convertRomanToArabic("MMMII") == 3002) && " Not 3002");
+		assert((convertRomanToArabic("MLXVI") == 1066) && " Not 1066");
+    assert((convertRomanToArabic("MCMLXXXIX") == 1989) && " Not 1989");
     
     cout << "PASS" << endl;
     return 0;
