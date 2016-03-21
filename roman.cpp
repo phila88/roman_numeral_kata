@@ -5,6 +5,7 @@
 using namespace std;
 
 static unordered_map<int,string> arabic_to_roman;
+static unordered_map<string,int> roman_to_arabic;
 
 void buildRomanHash(){
     // 1 - 10
@@ -70,18 +71,43 @@ string convertArabicToRoman(int num){
     return output;
 }
 
+void buildArabicHash(){
+		// reverse roman hash pairs
+    for(auto it : arabic_to_roman)
+        roman_to_arabic[it.second] = it.first;
+}
+
+int convertRomanToArabic(std::string str){
+    if(str.length() < 4){
+        auto it = roman_to_arabic.find(str);
+        if(it != roman_to_arabic.end())
+            return it->second;
+        else {
+            return 0; // base case
+        }
+    }
+}
+
 int main()
 {
     // Build Roman Numeral Hash
     buildRomanHash();
+		// Build Arabic Hash
+    buildArabicHash();
 
     // Tests
+    // Arabic to Roman
     assert((convertArabicToRoman(1) == "I") && "Not I");
-		assert((convertArabicToRoman(3) == "III") && "Not III");
+    assert((convertArabicToRoman(3) == "III") && "Not III");
     assert((convertArabicToRoman(9) == "IX") && "Not IX");
     assert((convertArabicToRoman(1066) == "MLXVI") && "Not MLXVI");
     assert((convertArabicToRoman(1989) == "MCMLXXXIX") && "Not MCMLXXXIX");
 
+    // Roman to Arabic
+    assert((convertRomanToArabic("I") == 1) && "Not 1");
+    assert((convertRomanToArabic("III") == 3) && "Not 3");
+    assert((convertRomanToArabic("IX") == 9) && "Not 9");
+    
     cout << "PASS" << endl;
     return 0;
 }
